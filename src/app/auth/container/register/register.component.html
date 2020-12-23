@@ -1,0 +1,85 @@
+<div class="row justify-content-center mt-3">
+  <div class="col-md-6 rounded bg-indigo p-4">
+    <h1 class="text-white">Diary App - Sign up</h1>
+    <form [formGroup]="signupForm">
+      <div class="form-group">
+        <label for="username" class="text-white">username</label>
+        <input
+          formControlName="username"
+          type="text"
+          class="form-control"
+          id="username"
+          aria-describedby="emailHelp"
+          placeholder="Enter username"
+          [class.is-invalid]="isInvalid('username')"
+        />
+        <div class="alert alert-danger" *ngIf="isInvalid('username')">
+          <div *ngIf="getFieldByName('username').errors.required">
+            username is required
+          </div>
+          <div *ngIf="getFieldByName('username').errors.minlength">
+            username min length is 4
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email" class="text-white">Email address</label>
+        <input
+          formControlName="email"
+          name="email"
+          type="email"
+          class="form-control"
+          id="email"
+          placeholder="Enter email"
+          [class.is-invalid]="isInvalid('email')"
+        />
+        <div class="alert alert-danger" *ngIf="isInvalid('email')">
+          <div *ngIf="getFieldByName('email').errors.required">
+            email is required
+          </div>
+          <div *ngIf="getFieldByName('email').errors.email">
+            email must be an email
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="text-white">Password</label>
+        <input
+          formControlName="password"
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Password"
+          [class.is-invalid]="isInvalid('password')"
+        />
+
+        <div class="alert alert-danger" *ngIf="isInvalid('password')">
+          <div *ngIf="getFieldByName('password').errors.required">
+            password is required!
+          </div>
+          <div *ngIf="getFieldByName('password').errors.minlength">
+            password min length is 5!
+          </div>
+        </div>
+      </div>
+
+      <div class="alert alert-danger" *ngIf="alreadyRegistered">
+        email is already registered, if you are the owner please sign in!
+      </div>
+      <p-button
+        (click)="onSubmit(signupForm.value)"
+        type="submit"
+        class="float-right"
+        label="Register"
+      ></p-button>
+      <p>
+        <a class="text-white" [routerLink]="['/login']"
+          >already have an account? Please sign in!</a
+        >
+      </p>
+      s
+    </form>
+  </div>
+</div>

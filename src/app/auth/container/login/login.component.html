@@ -1,0 +1,32 @@
+
+<div class="row justify-content-center mt-3">
+  <div class="col-md-6 rounded bg-indigo text-white p-4">
+      <h1>Diary App - Login</h1>
+      <form [formGroup]="loginForm">
+        <div class="alert alert-danger mb-2" *ngIf="authFailed">
+          Invalid email and/or password!
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="text" formControlName="email" class="form-control" id="email" placeholder="insert email"
+            [class.is-invalid]="isFieldInvalid('email')"
+          >
+          <div class="alert alert-danger" *ngIf="isFieldInvalid('email')" >
+            Email is required!
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" id="password" formControlName="password" placeholder="insert password" class="form-control"
+          [class.is-invalid]="isFieldInvalid('password')">
+          <div class="alert alert-danger" *ngIf="isFieldInvalid('password')">
+            Password is required!
+          </div>
+        </div>
+        <p-button (click)="login()" type="submit" class="float-right" label="Login"></p-button>
+        <p class="font-size"><a class="text-white" [routerLink]="['/signup']">Don't have an account? Please sign up!</a> </p>
+      </form>
+    </div>
+</div>
+

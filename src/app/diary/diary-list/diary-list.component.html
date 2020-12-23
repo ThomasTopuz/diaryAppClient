@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card rounded">
+      <p-dataView #dv [value]="diaryNotes" layout="list" class="rounded">
+        <ng-template let-diaryNote pTemplate="listItem">
+          <div class="p-col-12 p-3 m-3">
+            <div class="product-list-item">
+              <div class="row">
+                <div class="col-11">
+                  <div class="product-list-detail">
+                    <div class="product-name">{{ diaryNote.date | date }}</div>
+                    <div class="product-description">
+                      {{ diaryNote.content }}
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-1">
+                  <div class="row">
+                    <button
+                      pButton
+                      class="p-button-danger"
+                      icon="pi pi-trash"
+                    ></button>
+
+                    <p-button class="p-button-danger" icon="pi pi-trash">
+                    </p-button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+      </p-dataView>
+    </div>
+  </div>
+</div>

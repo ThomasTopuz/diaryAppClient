@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
         console.log(resp);
         const token = resp.headers.get('x-auth-token');
         localStorage.setItem('token', token);
-        this.router.navigate([`diary/${resp.body._id}`]);
+        this.router.navigate([`diary`]);
       }
     }, (err)=>{
         this.alreadyRegistered = true;

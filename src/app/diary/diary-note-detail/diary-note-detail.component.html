@@ -4,7 +4,7 @@
     label="cancel"
     class="p-button-secondary m-3 float-right"
   ></p-button>
-  <div *ngIf="user" class="position-fixed">
+  <div *ngIf="user">
     <h1 class="text-white m-3">{{ user.username }}, {{ user.email }}</h1>
   </div>
   <div class="container">

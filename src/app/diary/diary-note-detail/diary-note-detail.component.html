@@ -1,0 +1,52 @@
+<div *ngIf="!loading">
+  <p-button
+    (click)="goBack()"
+    label="cancel"
+    class="p-button-secondary m-3 float-right"
+  ></p-button>
+  <div *ngIf="user" class="position-fixed">
+    <h1 class="text-white m-3">{{ user.username }}, {{ user.email }}</h1>
+  </div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <h1 class="text-white">{{ note.date | date }}</h1>
+    </div>
+    <div class="row">
+      <div class="col-10">
+        <div class="container">
+          <div class="row">
+            <textarea
+              [formControl]="noteContentField"
+              rows="4"
+              cols="120"
+              pInputTextarea
+              autoResize="autoResize"
+              class="float-left"
+              placeholder="content"
+              style="width: 100%"
+            ></textarea>
+            <div
+              class="alert alert-danger w-100 mt-2"
+              *ngIf="noteContentField.invalid && noteContentField.touched"
+            >
+              Content is requried
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2">
+        <div class="container h-100">
+          <div class="row align-items-center h-100">
+            <p-button
+              (click)="onSumbit()"
+              label="submit"
+              styleClass="p-button-lg"
+              class="ml-3"
+            ></p-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

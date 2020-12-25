@@ -1,36 +1,45 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { JwtHelperService } from "@auth0/angular-jwt";
-
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
-BASE_URL = "http://localhost:3000/api/v1/user";
-  constructor(private httpClient: HttpClient) { }
+  BASE_URL = 'http://localhost:3000/api/v1/user';
+  constructor(private http: HttpClient) {}
 
-  register(payload){
+  register(payload): Observable<any> {
     //returns a JWT in the header: "x-auth-token"
-    return this.httpClient.post(`${this.BASE_URL}/register`, payload, {observe: 'response'});
+    return this.http.post(`${this.BASE_URL}/register`, payload, {
+      observe: 'response',
+    });
   }
 
-  login(payload) {
-    return this.httpClient.post(`${this.BASE_URL}/auth`, payload, {observe: 'response', responseType:'json'});
+  login(payload): Observable<any> {
+    return this.http.post(`${this.BASE_URL}/auth`, payload, {
+      observe: 'response',
+      responseType: 'json',
+    });
   }
 
-  isLogged(): boolean{
+  isLogged(): boolean {
     const helper = new JwtHelperService();
     const token = localStorage.getItem('token');
 
-    if(!token){
-      console.log("false")
+    if (!token) {
+      console.log('false');
       return false;
     }
 
     return !helper.isTokenExpired(token);
   }
 
+  getCurrentUser(): Observable<any> {
+    const httpHeaders = new HttpHeaders({
+      'x-auth-token': localStorage.getItem('token'),
+    });
+    return this.http.get(`${this.BASE_URL}/me`, { headers: httpHeaders });
+  }
 }

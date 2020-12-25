@@ -22,7 +22,15 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    let token = localStorage.getItem('token');
+    this.authenticationService.getCurrentUser()
+    .subscribe((data)=>{
+      this.router.navigate(['diary']);
+    }, ()=>{
+      return;
+    })
+  }
 
   getField(fieldName: string) {
     return this.loginForm.get(fieldName);
@@ -38,8 +46,8 @@ export class LoginComponent implements OnInit {
     }
     this.authenticationService.login(this.loginForm.value).subscribe(
       (resp: HttpResponse<any>) => {
-        localStorage.setItem('token', resp.body.token);
-        this.router.navigate([`diary/${resp.body.user._id}`]);
+        localStorage.setItem('token', resp.headers.get('x-auth-token'));
+        this.router.navigate(["diary"]);
       },
       (err) => {
         this.authFailed = true;

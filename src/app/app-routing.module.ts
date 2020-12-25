@@ -6,12 +6,14 @@ import { AuthenticationService } from "./auth/authentication.service";
 import { LoginComponent } from "./auth/container/login/login.component";
 import { RegisterComponent } from "./auth/container/register/register.component";
 import { DiaryListComponent } from "./diary/diary-list/diary-list.component";
+import { DiaryNoteDetailComponent} from "./diary/diary-note-detail/diary-note-detail.component";
 
 const routes: Routes = [
   { path: "signup", component: RegisterComponent },
   { path: "login", component: LoginComponent },
-  { path: "diary/:id", component: DiaryListComponent },
-  { path: "", redirectTo: "/signup", pathMatch: "full" },
+  { path: "diary", component: DiaryListComponent, canActivate:[AuthGuardService]},
+  { path: "diary/detail/:id", component:DiaryNoteDetailComponent, canActivate:[AuthGuardService]},
+  { path: "", redirectTo: "/login", pathMatch: "full" },
 ];
 
 @NgModule({

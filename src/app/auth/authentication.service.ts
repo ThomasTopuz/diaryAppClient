@@ -7,7 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root',
 })
 export class AuthenticationService {
-  BASE_URL = 'http://localhost:3000/api/v1/user';
+  BASE_URL = 'https://mysterious-taiga-12627.herokuapp.com/api/v1/user';
   constructor(private http: HttpClient) {}
 
   register(payload): Observable<any> {

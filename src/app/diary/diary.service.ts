@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class DiaryService {
-  BASE_URL_DIARY = 'https://mysterious-taiga-12627.herokuapp.com/api/v1/diary';
+  BASE_URL_DIARY = 'https://diaryapp-backend.herokuapp.com/api/v1/diary';
 
   constructor(private readonly http: HttpClient) {}
 

@@ -43,13 +43,12 @@ export class RegisterComponent implements OnInit {
     this.authenticationService.register(signupForm)
     .subscribe((resp: HttpResponse<any>)=>{
       if(resp.headers.get('x-auth-token')){
-        console.log(resp);
         const token = resp.headers.get('x-auth-token');
         localStorage.setItem('token', token);
         this.router.navigate([`diary`]);
       }
-    }, (err)=>{
-        this.alreadyRegistered = true;
-    })
+    }, (err)=> {
+      this.alreadyRegistered = true;
+    });
   }
 }
